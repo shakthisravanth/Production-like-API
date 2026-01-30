@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.model.Employee;
 import com.service.EmployeeService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
@@ -19,7 +20,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
         Employee savedEmployee = employeeService.createEmployee(employee);
         return ResponseEntity.ok(savedEmployee);
     }
