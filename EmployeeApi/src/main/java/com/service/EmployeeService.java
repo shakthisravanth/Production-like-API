@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.model.Employee;
 import com.repository.EmployeeRepository;
+import com.exception.EmployeeNotFoundException;
+
 
 @Service
 public class EmployeeService {
@@ -25,7 +27,12 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Integer id) {
-        return employeeRepository.findById(id).orElse(null);
+
+        if (employeeRepository.findById(id).isPresent()) {
+            return employeeRepository.findById(id).get();
+        } else {
+            throw new EmployeeNotFoundException("Employee not found with id: " + id);
+        }
     }
 
     public Employee updateEmployee(Integer id, Employee employee) {
@@ -34,6 +41,11 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Integer id) {
-        employeeRepository.deleteById(id);
+
+		if (employeeRepository.existsById(id)) {
+				employeeRepository.deleteById(id);
+		} else {
+				throw new EmployeeNotFoundException("Employee not found with id: " + id);
+		}
     }
 }
