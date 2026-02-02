@@ -21,8 +21,8 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
-        Employee savedEmployee = employeeService.createEmployee(employee);
-        return ResponseEntity.ok(savedEmployee);
+        Employee savedEmployee = employeeService.createEmployee(employee);    
+        return ResponseEntity.status(201).body(savedEmployee);
     }
 
     @GetMapping
@@ -48,6 +48,6 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Integer id) {
         employeeService.deleteEmployee(id);
-        return ResponseEntity.ok("Employee deleted successfully");
+        return ResponseEntity.noContent().build();
     }
 }
