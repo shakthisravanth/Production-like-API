@@ -14,10 +14,12 @@ import org.springframework.validation.FieldError;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(EmployeeNotFoundException.class)
-	public ResponseEntity<String> handleEmployeeNotFound(EmployeeNotFoundException ex) {
 
-		return ResponseEntity.status(404).body(ex.getMessage());
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public ResponseEntity<ErrorResponse> handleEmployeeNotFound(EmployeeNotFoundException ex) {
+
+		ErrorResponse error = new ErrorResponse(ex.getMessage(), 404);
+		return ResponseEntity.status(404).body(error);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
