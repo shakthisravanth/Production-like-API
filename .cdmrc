@@ -1,0 +1,7 @@
+run-button: >
+  cd /home/damner/code/EmployeeApi && mvn spring-boot:run
+
+terminals:
+  - cd /home/damner/code/EmployeeApi && mvn spring-boot:run
+
+playground-view: browser
